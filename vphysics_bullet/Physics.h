@@ -100,3 +100,10 @@ extern CPhysics g_Physics;
 contextBridge.exposeInMainWorld('connector', electronConnector)
 type ElectronConnector = typeof electronConnector
 export default ElectronConnector
+export const loginStatus = createSelector(
+    (state: FullState) => state.toolState,
+    (tool: ToolState) => ({
+        signedIn: !!(tool.cursorLogin.accessToken && tool.cursorLogin.profile),
+        proVersion: !!tool.cursorLogin.stripeId,
+    })
+)
